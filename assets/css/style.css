@@ -17,10 +17,11 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-style: solid;
+    /* Might add a border back in later */
+    /* border-style: solid;
     border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(5, 5, 112);
+    border-radius: 8px;
+    border-color: rgb(5, 5, 112); */
     width: 400px;
     padding: 10px;
     margin: auto;
@@ -54,5 +55,9 @@ div p {
 .startButton {
     font-size: 25px;
     margin: auto;
+}
 
+.highScores {
+    font-size: 25px;
+    margin: auto;
 }
