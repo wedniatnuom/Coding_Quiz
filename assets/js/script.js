@@ -6,38 +6,74 @@ var quizQuestions = [
     "Where in your index file should you link to your javascript file?",
     "What syntax is used to wrap a group of flex boxes?"
 ]
+
+var quizAnswers = [
+    { qa: "( )", qb: "{ }", qc: "< >", qd: "[ ]", answer: "qa" },
+    { qa: "( )", qb: "{ }", qc: "< >", qd: "[ ]", answer: "qd" },
+    { qa: "getElementByClassName", qb: "createElement", qc: "getElementById", qd: "createElement", answer: "qc" },
+    { qa: "Before </body>", qb: "Inside <head>", qc: "After </html>", qd: "Inside <header>", answer: "qa" },
+    { qa: "flex: wrap", qb: "flex-wrap: wrap", qc: "flex-wrap: true", qd: "flexwrap: true", answer: "qb" }
+]
+
 var mainEl = document.getElementById("mainText")
 var textEl = document.body.children[2].children[0].children[0];
 var textEl2 = document.body.children[2].children[0].children[1];
 var buttons = document.getElementById("buttons");
-var submit = document.createElement("button")
+var nextEl = document.getElementById("nextButton")
+var openButtonEl = document.getElementsByClassName("openButton")
 var listEl = document.createElement("ol");
 var li1 = document.createElement("li");
 var li2 = document.createElement("li");
 var li3 = document.createElement("li");
 var li4 = document.createElement("li");
+var quizIndex = 0
 
 
-
-document.getElementById("startButton").addEventListener("click", function(){
-    textEl.textContent = quizQuestions[0]
-    textEl2.textContent = ""
-    buttons.textContent = ""
+function genQuestions() {
+    textEl.textContent = quizQuestions[quizIndex];
     textEl.appendChild(listEl);
     listEl.appendChild(li1);
     listEl.appendChild(li2);
     listEl.appendChild(li3);
-    listEl.appendChild(li4);    
-    li1.textContent = "{ }";
-    li2.textContent = "( )";
-    li3.textContent = "[ ]";
-    li4.textContent = "< >";
-    mainEl.appendChild(submit);
-    mainEl.addEventListener("click", function(){
-        console.log("event test")
-    })
-    submit.textContent = "Next";
+    listEl.appendChild(li4);
+    if (quizQuestions.length > quizIndex) {
+        li1.textContent = quizAnswers[quizIndex].qa;
+        li2.textContent = quizAnswers[quizIndex].qb;
+        li3.textContent = quizAnswers[quizIndex].qc;
+        li4.textContent = quizAnswers[quizIndex].qd;
+    }
+    quizIndex++
+}
+
+
+document.getElementById("startButton").addEventListener("click", function () {
+    textEl2.textContent = "";
+    for (i = 0; i < openButtonEl.length; i++) {
+        openButtonEl[i].style.display = "none"
+    }
+    nextEl.style.display = "block";
+    genQuestions();
 })
+
+nextEl.addEventListener("click", function () {
+    console.log(quizIndex)
+    console.log(quizQuestions.length)
+    genQuestions()
+    if (quizQuestions.length < quizIndex) {
+        textEl.textContent = "Finished!"
+        nextEl.style.display = "none";
+        li1.style.display = "none";
+        li2.style.display = "none";
+        li3.style.display = "none";
+        li4.style.display = "none";
+
+    }
+
+})
+
+
+
+
 
 
 

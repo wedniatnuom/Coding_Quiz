@@ -42,6 +42,11 @@ div p {
     position: relative;
 }
 
+.centerButton button {
+    font-size: 25px;
+    margin: auto;
+}
+
 .centerVert {
     margin: 0;
     position: absolute;
@@ -52,12 +57,6 @@ div p {
 
 }
 
-.startButton {
-    font-size: 25px;
-    margin: auto;
-}
-
-.highScores {
-    font-size: 25px;
-    margin: auto;
+.nextButton {
+    display: none;
 }
