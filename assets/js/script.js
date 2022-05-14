@@ -82,6 +82,10 @@ function countdownTimer() {
         if (timeClock <= 0) {
             clearInterval(countDown);
         }
+        if (textEl.textContent === "Finished!"){
+            clearInterval(countDown);
+            timerEl.style.display = "none";
+        }
         timerEl.textContent = timeClock + " seconds remaining!";
         timeClock -= 1;
         
