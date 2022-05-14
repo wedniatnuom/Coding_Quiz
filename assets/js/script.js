@@ -8,11 +8,11 @@ var quizQuestions = [
 ]
 
 var quizAnswers = [
-    { qa: "( )", qb: "{ }", qc: "< >", qd: "[ ]", answer: "qa" },
-    { qa: "( )", qb: "{ }", qc: "< >", qd: "[ ]", answer: "qd" },
-    { qa: "getElementByClassName", qb: "createElement", qc: "getElementById", qd: "createElement", answer: "qc" },
-    { qa: "Before </body>", qb: "Inside <head>", qc: "After </html>", qd: "Inside <header>", answer: "qa" },
-    { qa: "flex: wrap", qb: "flex-wrap: wrap", qc: "flex-wrap: true", qd: "flexwrap: true", answer: "qb" }
+    { q0: "( )", q1: "{ }", q2: "< >", q3: "[ ]", answer: "q1" },
+    { q0: "( )", q1: "{ }", q2: "< >", q3: "[ ]", answer: "q3" },
+    { q0: "getElementByClassName", q1: "createElement", q2: "getElementById", q3: "createElement", answer: "q2" },
+    { q0: "Before </body>", q1: "Inside <head>", q2: "After </html>", q3: "Inside <header>", answer: "q0" },
+    { q0: "flex: wrap", q1: "flex-wrap: wrap", q2: "flex-wrap: true", q3: "flexwrap: true", answer: "q1" }
 ]
 var timerEl = document.getElementById("timer")
 var mainEl = document.getElementById("mainText")
@@ -27,86 +27,85 @@ var li2 = document.createElement("li");
 var li3 = document.createElement("li");
 var li4 = document.createElement("li");
 var quizIndex = 0
+var clickCounter = 1
+
 
 
 function genQuestions() {
     textEl.textContent = quizQuestions[quizIndex];
-    textEl.appendChild(listEl);
-    listEl.appendChild(li1);
-    listEl.appendChild(li2);
-    listEl.appendChild(li3);
-    listEl.appendChild(li4);
+    
+
     if (quizQuestions.length > quizIndex) {
-        li1.textContent = quizAnswers[quizIndex].qa;
-        li2.textContent = quizAnswers[quizIndex].qb;
-        li3.textContent = quizAnswers[quizIndex].qc;
-        li4.textContent = quizAnswers[quizIndex].qd;
+        var radioLoop = 4
+
+        for (i = 0; i < radioLoop; i++) {
+
+            var radiobox = document.createElement('input');
+            radiobox.type = 'radio';
+            radiobox.id = quizAnswers[clickCounter]['q' + i];
+            radiobox.value = quizAnswers[clickCounter]['q' + i];
+            radiobox.name = "radioAnswers";
+
+            var label = document.createElement('label')
+            label.htmlFor = quizAnswers[clickCounter]['q' + i];
+            label.textContent = quizAnswers[clickCounter]['q' + i];
+
+            var newline = document.createElement('br');
+
+            var container = document.getElementById('container');
+            textEl.appendChild(radiobox);
+            textEl.appendChild(label);
+            textEl.appendChild(newline);
+        }
+        quizIndex++
     }
-    quizIndex++
 }
 
-
-document.getElementById("startButton").addEventListener("click", function () {
-    textEl2.textContent = "";
-    for (i = 0; i < openButtonEl.length; i++) {
-        openButtonEl[i].style.display = "none"
-    }
-    nextEl.style.display = "block";
-    genQuestions();
-    countdownTimer();
-})
-
-nextEl.addEventListener("click", function () {
-    console.log(quizIndex)
-    console.log(quizQuestions.length)
-    genQuestions()
-    if (quizQuestions.length < quizIndex) {
-        textEl.textContent = "Finished!"
-        nextEl.style.display = "none";
-        li1.style.display = "none";
-        li2.style.display = "none";
-        li3.style.display = "none";
-        li4.style.display = "none";
-
-    }
-
-})
-
-
-function countdownTimer() {
-    var timeClock = 30;
-    var countDown = setInterval(function () {
-        timerEl.style.color = "rgb(5, 5, 112)";
-        timerEl.style.fontSize = "x-large";
-        timerEl.style.alignItems = "center";
-        if (timeClock <= 0) {
-            clearInterval(countDown);
+    document.getElementById("startButton").addEventListener("click", function () {
+        textEl2.textContent = "";
+        for (i = 0; i < openButtonEl.length; i++) {
+            openButtonEl[i].style.display = "none"
         }
-        if (textEl.textContent === "Finished!"){
-            clearInterval(countDown);
-            timerEl.style.display = "none";
+        nextEl.style.display = "block";
+        genQuestions();
+        countdownTimer();
+    })
+
+    nextEl.addEventListener("click", function () {
+        genQuestions();
+        clicks();
+        console.log(clickCounter)
+        if (quizQuestions.length < clickCounter) {
+            textEl.textContent = "Finished!"
+            nextEl.style.display = "none";
+            li1.style.display = "none";
+            li2.style.display = "none";
+            li3.style.display = "none";
+            li4.style.display = "none";
         }
-        timerEl.textContent = timeClock + " seconds remaining!";
-        timeClock -= 1;
-        
-    }, 1000);
-}
+    })
+
+    function clicks() {
+        nextEl.onclick = clickCounter++
+    }
 
 
+    function countdownTimer() {
+        var timeClock = 30;
+        var countDown = setInterval(function () {
+            timerEl.style.color = "rgb(5, 5, 112)";
+            timerEl.style.fontSize = "x-large";
+            timerEl.style.alignItems = "center";
+            if (timeClock <= 0) {
+                clearInterval(countDown);
+            }
+            if (textEl.textContent === "Finished!") {
+                clearInterval(countDown);
+                timerEl.style.display = "none";
+            }
+            timerEl.textContent = timeClock + " seconds remaining!";
+            timeClock -= 1;
 
+        }, 1000);
+    }
 
-
-
-// document.getElementById("next").addEventListener(click, function(){
-//     console.log("it worked")
-// })
-
-
-
-// document.getElementById("startButton").addEventListener("click", quizLoop())
-//     document.getElementById("mainText").innerHTML = quizLoop
-//     console.log(quizLoop)
-
-// getElementById("mainText").innerHTML = quizQuestions[0]
-
-//     })
