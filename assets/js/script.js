@@ -14,7 +14,7 @@ var quizAnswers = [
     { qa: "Before </body>", qb: "Inside <head>", qc: "After </html>", qd: "Inside <header>", answer: "qa" },
     { qa: "flex: wrap", qb: "flex-wrap: wrap", qc: "flex-wrap: true", qd: "flexwrap: true", answer: "qb" }
 ]
-
+var timerEl = document.getElementById("timer")
 var mainEl = document.getElementById("mainText")
 var textEl = document.body.children[2].children[0].children[0];
 var textEl2 = document.body.children[2].children[0].children[1];
@@ -53,6 +53,7 @@ document.getElementById("startButton").addEventListener("click", function () {
     }
     nextEl.style.display = "block";
     genQuestions();
+    countdownTimer();
 })
 
 nextEl.addEventListener("click", function () {
@@ -72,6 +73,20 @@ nextEl.addEventListener("click", function () {
 })
 
 
+function countdownTimer() {
+    var timeClock = 30;
+    var countDown = setInterval(function () {
+        timerEl.style.color = "rgb(5, 5, 112)";
+        timerEl.style.fontSize = "x-large";
+        timerEl.style.alignItems = "center";
+        if (timeClock <= 0) {
+            clearInterval(countDown);
+        }
+        timerEl.textContent = timeClock + " seconds remaining!";
+        timeClock -= 1;
+        
+    }, 1000);
+}
 
 
 
