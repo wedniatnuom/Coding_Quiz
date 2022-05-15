@@ -71,3 +71,49 @@ div p {
 .nextButton {
     display: none;
 }
+
+#radioButtonsQ1 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
+#radioButtonsQ2 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
+#radioButtonsQ3 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
+#radioButtonsQ4 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
+#radioButtonsQ5 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
