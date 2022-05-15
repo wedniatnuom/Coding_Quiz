@@ -30,98 +30,87 @@ var q0El = document.getElementById("Q0");
 var q1El = document.getElementById("Q1");
 var q2El = document.getElementById("Q2");
 var q3El = document.getElementById("Q3");
-var quizIndex = 0
-var clickCounter = 1
-var questionCounter = 0
+var quizIndex = 0;
+var clickCounter = 1;
 
 function genQuestions() {
     textEl.textContent = quizQuestions[quizIndex];
     if (quizQuestions.length > quizIndex) {
-        q0El.textContent = quizAnswers[clickCounter].q0;
-        q1El.textContent = quizAnswers[clickCounter].q1;
-        q2El.textContent = quizAnswers[clickCounter].q2;
-        q3El.textContent = quizAnswers[clickCounter].q3;
-        quizIndex++
-        console.log(clickCounter);
-        console.log(questionCounter);
-        console.log(quizIndex)
-        
+         quizIndex++
+        console.log(clickCounter + " clickCounter");
+        console.log(quizIndex + " quizIndex");
     }
-    if (questionCounter === 0) {
+    if (quizIndex === 1) {
         formQ1.style.display = "block";
         formQ2.style.display = "none";
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
 
-        formQ1.addEventListener("click", function(){
-        if (document.getElementById("ans1").checked){
-            console.log("success!")
-        }
-        else {
-            console.log("False!!!")
-        }
-    })
-    } 
-    if (questionCounter === 1) {
+        formQ1.addEventListener("click", function () {
+            if (document.getElementById("answer1Q1").checked) {
+                console.log("success!")
+            }
+            else {
+                console.log("False!!!")
+            }
+        })
+    } else if (quizIndex === 2) {
         formQ1.style.display = "none";
         formQ2.style.display = "block";
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
-        formQ2.addEventListener("click", function(){
-        if (document.getElementById("ans4").checked){
-            console.log("success!")
-        }
-        else {
-            console.log("False!!!")
-        }
-    })
-    }
-    if (questionCounter === 2) {
+        formQ2.addEventListener("click", function () {
+            if (document.getElementById("ans4").checked) {
+                console.log("success!")
+            }
+            else {
+                console.log("False!!!")
+            }
+        })
+    } else if (quizIndex === 3) {
         formQ1.style.display = "none";
         formQ2.style.display = "none";
         formQ3.style.display = "block";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
-        formQ3.addEventListener("click", function(){
-        if (document.getElementById("ans3").checked){
-            console.log("success!")
-        }
-        else {
-            console.log("False!!!")
-        }
-    })
-    }
-    if (questionCounter === 3) {
+        formQ3.addEventListener("click", function () {
+            if (document.getElementById("ans3").checked) {
+                console.log("success!")
+            }
+            else {
+                console.log("False!!!")
+            }
+        })
+    } else if (quizIndex === 4) {
         formQ1.style.display = "none";
         formQ2.style.display = "none";
         formQ3.style.display = "none";
         formQ4.style.display = "block";
         formQ5.style.display = "none";
-        formQ4.addEventListener("click", function(){
-        if (document.getElementById("ans1").checked){
-            console.log("success!")
-        }
-        else {
-            console.log("False!!!")
-        }
-    })
-    }
-    if (questionCounter === 4) {
+        formQ4.addEventListener("click", function () {
+            if (document.getElementById("ans1").checked) {
+                console.log("success!")
+            }
+            else {
+                console.log("False!!!")
+            }
+        })
+    } else if (quizIndex === 5) {
         formQ1.style.display = "none";
         formQ2.style.display = "none";
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "block";
-        formQ5.addEventListener("click", function(){
-        if (document.getElementById("ans2").checked){
-            console.log("success!")
-        }
-        else {
-            console.log("False!!!")
-        }
-    })
+        formQ5.addEventListener("click", function () {
+            if (document.getElementById("ans2").checked) {
+                console.log("success!")
+            }
+            else {
+                console.log("False!!!")
+            }
+        })
     }
 }
 
@@ -139,11 +128,11 @@ document.getElementById("startButton").addEventListener("click", function () {
 nextEl.addEventListener("click", function () {
     genQuestions();
     nextEl.onclick = clickCounter++
-    nextEl.onclick = questionCounter++
     if (quizQuestions.length < clickCounter) {
         textEl.textContent = "Finished!"
         nextEl.style.display = "none";
         formQ1.style.display = "none";
+        formQ5.style.display = "none";
     }
 })
 
