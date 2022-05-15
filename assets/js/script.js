@@ -1,4 +1,3 @@
-var testValue
 var quizQuestions = [
     "What symbol do you need at the end of a function?",
     "What symbol do you use to creat an array?",
@@ -20,10 +19,12 @@ var formQ3 = document.getElementById("radioButtonsQ3");
 var formQ4 = document.getElementById("radioButtonsQ4");
 var formQ5 = document.getElementById("radioButtonsQ5");
 var scoreEl = document.getElementById("score");
+var nameForm = document.getElementById("scoreForm");
 var timeClock = 30;
 var points = 0;
 var quizIndex = 0;
 var clickCounter = 1;
+
 
 function genQuestions() {
     textEl.textContent = quizQuestions[quizIndex];
@@ -40,10 +41,9 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
-
         formQ1.addEventListener("click", function () {
             formQ1.style.display = "none"
-            if (document.getElementById("answer1Q1").checked) {
+            if (document.getElementById("answer2Q1").checked) {
                 points++
             } else {
                 timeClock -= 10;
@@ -55,7 +55,6 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
-
         formQ2.addEventListener("click", function () {
             formQ2.style.display = "none";
             if (document.getElementById("answer4Q2").checked) {
@@ -70,7 +69,6 @@ function genQuestions() {
         formQ3.style.display = "block";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
-
         formQ3.addEventListener("click", function () {
             formQ3.style.display = "none";
             if (document.getElementById("answer3Q3").checked) {
@@ -85,7 +83,6 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "block";
         formQ5.style.display = "none";
-
         formQ4.addEventListener("click", function () {
             formQ4.style.display = "none";
             if (document.getElementById("answer1Q4").checked) {
@@ -100,7 +97,6 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "block";
-       
         formQ5.addEventListener("click", function () {
             formQ5.style.display = "none";
             if (document.getElementById("answer2Q5").checked) {
@@ -108,9 +104,8 @@ function genQuestions() {
             } else {
                 timeClock -= 10;
             }
-        
         })
-}
+    }
 }
 
 document.getElementById("startButton").addEventListener("click", function () {
@@ -119,7 +114,6 @@ document.getElementById("startButton").addEventListener("click", function () {
         openButtonEl[i].style.display = "none"
     }
     nextEl.style.display = "block";
-
     genQuestions();
     countdownTimer();
 })
@@ -127,12 +121,16 @@ document.getElementById("startButton").addEventListener("click", function () {
 nextEl.addEventListener("click", function () {
     genQuestions();
     nextEl.onclick = clickCounter++
-    if (quizQuestions.length < clickCounter) {
+    if (quizQuestions.length < clickCounter) { 
         scoreEl.textContent = "New Score: " + points + "!";
         textEl.textContent = "Finished!"
-
+        nameForm.style.display = "block"
+        timerEl.style.display = "none";
         nextEl.style.display = "none";
         formQ1.style.display = "none";
+        formQ2.style.display = "none";
+        formQ3.style.display = "none";
+        formQ4.style.display = "none";
         formQ5.style.display = "none";
     }
 })
@@ -144,13 +142,22 @@ function countdownTimer() {
         timerEl.style.alignItems = "center";
         if (timeClock <= 0) {
             clearInterval(countDown);
+            scoreEl.textContent = "New Score: " + points + "!";
+            textEl.textContent = "Out of Time!";
+            nameForm.style.display = "block"
+            timerEl.style.display = "none";
+            nextEl.style.display = "none";
+            formQ1.style.display = "none";
+            formQ2.style.display = "none";
+            formQ3.style.display = "none";
+            formQ4.style.display = "none";
+            formQ5.style.display = "none";
         }
         if (textEl.textContent === "Finished!") {
-            clearInterval(countDown);
             timerEl.style.display = "none";
+            return;
         }
         timerEl.textContent = timeClock + " seconds remaining!";
         timeClock -= 1;
-
     }, 1000);
 }
