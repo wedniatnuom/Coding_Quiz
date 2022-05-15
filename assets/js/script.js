@@ -19,6 +19,9 @@ var formQ3 = document.getElementById("radioButtonsQ3");
 var formQ4 = document.getElementById("radioButtonsQ4");
 var formQ5 = document.getElementById("radioButtonsQ5");
 var scoreEl = document.getElementById("score");
+var promptEl = document.getElementById("questionBox");
+var buttonHighScore = document.getElementById("scoreButton")
+var highScoreEl = document.getElementById("highScores");
 var nameForm = document.getElementById("scoreForm");
 var timeClock = 30;
 var points = 0;
@@ -112,6 +115,7 @@ document.getElementById("startButton").addEventListener("click", function () {
     textEl2.textContent = "";
     for (i = 0; i < openButtonEl.length; i++) {
         openButtonEl[i].style.display = "none"
+        highScoreEl.style.display = "none";
     }
     nextEl.style.display = "block";
     genQuestions();
@@ -121,10 +125,10 @@ document.getElementById("startButton").addEventListener("click", function () {
 nextEl.addEventListener("click", function () {
     genQuestions();
     nextEl.onclick = clickCounter++
-    if (quizQuestions.length < clickCounter) { 
+    if (quizQuestions.length < clickCounter) {
         scoreEl.textContent = "New Score: " + points + "!";
-        textEl.textContent = "Finished!"
-        nameForm.style.display = "block"
+        textEl.textContent = "Finished!";
+        nameForm.style.display = "block";
         timerEl.style.display = "none";
         nextEl.style.display = "none";
         formQ1.style.display = "none";
@@ -161,3 +165,10 @@ function countdownTimer() {
         timeClock -= 1;
     }, 1000);
 }
+
+buttonHighScore.addEventListener("click", function () {
+    promptEl.style.display = "none";
+    highScoreEl.style.display = "block";
+    buttonHighScore.style.display = "none";
+})
+
