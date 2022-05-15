@@ -7,13 +7,6 @@ var quizQuestions = [
     "What syntax is used to wrap a group of flex boxes?"
 ]
 
-var quizAnswers = [
-    { q0: "( )", q1: "{ }", q2: "< >", q3: "[ ]", answer: "q0" },
-    { q0: "( )", q1: "{ }", q2: "< >", q3: "[ ]", answer: "q3" },
-    { q0: "getElementByClassName", q1: "createElement", q2: "getElementById", q3: "createElement", answer: "q2" },
-    { q0: "Before </body>", q1: "Inside <head>", q2: "After </html>", q3: "Inside <header>", answer: "q0" },
-    { q0: "flex: wrap", q1: "flex-wrap: wrap", q2: "flex-wrap: true", q3: "flexwrap: true", answer: "q1" }
-]
 var timerEl = document.getElementById("timer");
 var mainEl = document.getElementById("mainText");
 var textEl = document.body.children[2].children[0].children[0];
@@ -22,21 +15,22 @@ var buttons = document.getElementById("buttons");
 var nextEl = document.getElementById("nextButton");
 var openButtonEl = document.getElementsByClassName("openButton");
 var formQ1 = document.getElementById("radioButtonsQ1");
-var formQ2 = document.getElementById("radioButtonsQ2")
-var formQ3 = document.getElementById("radioButtonsQ3")
-var formQ4 = document.getElementById("radioButtonsQ4")
-var formQ5 = document.getElementById("radioButtonsQ5")
-var q0El = document.getElementById("Q0");
-var q1El = document.getElementById("Q1");
-var q2El = document.getElementById("Q2");
-var q3El = document.getElementById("Q3");
+var formQ2 = document.getElementById("radioButtonsQ2");
+var formQ3 = document.getElementById("radioButtonsQ3");
+var formQ4 = document.getElementById("radioButtonsQ4");
+var formQ5 = document.getElementById("radioButtonsQ5");
+var scoreEl = document.getElementById("score");
+var timeClock = 30;
+var points = 0;
 var quizIndex = 0;
 var clickCounter = 1;
 
 function genQuestions() {
     textEl.textContent = quizQuestions[quizIndex];
     if (quizQuestions.length > quizIndex) {
-         quizIndex++
+        console.log(points + " points variable")
+        quizIndex++
+        scoreEl.textContent = "Current Score: " + points;
         console.log(clickCounter + " clickCounter");
         console.log(quizIndex + " quizIndex");
     }
@@ -48,11 +42,11 @@ function genQuestions() {
         formQ5.style.display = "none";
 
         formQ1.addEventListener("click", function () {
+            formQ1.style.display = "none"
             if (document.getElementById("answer1Q1").checked) {
-                console.log("success!")
-            }
-            else {
-                console.log("False!!!")
+                points++
+            } else {
+                timeClock -= 10;
             }
         })
     } else if (quizIndex === 2) {
@@ -61,12 +55,13 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
+
         formQ2.addEventListener("click", function () {
-            if (document.getElementById("ans4").checked) {
-                console.log("success!")
-            }
-            else {
-                console.log("False!!!")
+            formQ2.style.display = "none";
+            if (document.getElementById("answer4Q2").checked) {
+                points++
+            } else {
+                timeClock -= 10;
             }
         })
     } else if (quizIndex === 3) {
@@ -75,12 +70,13 @@ function genQuestions() {
         formQ3.style.display = "block";
         formQ4.style.display = "none";
         formQ5.style.display = "none";
+
         formQ3.addEventListener("click", function () {
-            if (document.getElementById("ans3").checked) {
-                console.log("success!")
-            }
-            else {
-                console.log("False!!!")
+            formQ3.style.display = "none";
+            if (document.getElementById("answer3Q3").checked) {
+                points++
+            } else {
+                timeClock -= 10;
             }
         })
     } else if (quizIndex === 4) {
@@ -89,12 +85,13 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "block";
         formQ5.style.display = "none";
+
         formQ4.addEventListener("click", function () {
-            if (document.getElementById("ans1").checked) {
-                console.log("success!")
-            }
-            else {
-                console.log("False!!!")
+            formQ4.style.display = "none";
+            if (document.getElementById("answer1Q4").checked) {
+                points++
+            } else {
+                timeClock -= 10;
             }
         })
     } else if (quizIndex === 5) {
@@ -103,15 +100,17 @@ function genQuestions() {
         formQ3.style.display = "none";
         formQ4.style.display = "none";
         formQ5.style.display = "block";
+       
         formQ5.addEventListener("click", function () {
-            if (document.getElementById("ans2").checked) {
-                console.log("success!")
+            formQ5.style.display = "none";
+            if (document.getElementById("answer2Q5").checked) {
+                points++
+            } else {
+                timeClock -= 10;
             }
-            else {
-                console.log("False!!!")
-            }
+        
         })
-    }
+}
 }
 
 document.getElementById("startButton").addEventListener("click", function () {
@@ -129,7 +128,9 @@ nextEl.addEventListener("click", function () {
     genQuestions();
     nextEl.onclick = clickCounter++
     if (quizQuestions.length < clickCounter) {
+        scoreEl.textContent = "New Score: " + points + "!";
         textEl.textContent = "Finished!"
+
         nextEl.style.display = "none";
         formQ1.style.display = "none";
         formQ5.style.display = "none";
@@ -137,7 +138,6 @@ nextEl.addEventListener("click", function () {
 })
 
 function countdownTimer() {
-    var timeClock = 30;
     var countDown = setInterval(function () {
         timerEl.style.color = "rgb(5, 5, 112)";
         timerEl.style.fontSize = "x-large";
@@ -154,4 +154,3 @@ function countdownTimer() {
 
     }, 1000);
 }
-

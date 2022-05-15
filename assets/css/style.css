@@ -72,6 +72,16 @@ div p {
     display: none;
 }
 
+#wrongAnswer {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0;
+    font-size: 25px;
+}
+
 #radioButtonsQ1 {
     display: none;
     align-items: center;
